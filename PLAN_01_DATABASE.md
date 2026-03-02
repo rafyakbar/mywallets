@@ -17,6 +17,8 @@
 * Always define proper indexes for foreign keys and frequently queried columns.
 * Use `softDeletes()` where specified.
 * Use `timestamps()` for `created_at` and `updated_at`.
+* Use `id()` for `id` (primary key).
+* Use `foreignId()`, `references()`, and `on()` for foreign key.
 * Triggers are used only for **denormalized snapshot fields**, not for business validation.
 * Models are generated using `php artisan code:models` and then manually reviewed.
 
@@ -113,7 +115,7 @@ php artisan make:migration create_categories_table
 ### Columns
 
 | Column     | Type              | Description                                 |
-| ---------- | ----------------- | ------------------------------------------- |
+|------------|-------------------|---------------------------------------------|
 | id         | BIGINT UNSIGNED   | Primary key                                 |
 | account_id | BIGINT UNSIGNED   | Foreign key to accounts.id                  |
 | name       | VARCHAR(255)      | Category display name                       |
@@ -123,6 +125,7 @@ php artisan make:migration create_categories_table
 | color      | VARCHAR(255) NULL | Color code for UI                           |
 | `order`    | BIGINT            | Sorting order within account                |
 | status     | VARCHAR(255)      | Status such as active or inactive           |
+| default    | BOOLEAN           | Default category for system                 |
 | created_at | TIMESTAMP         | Record creation time                        |
 | updated_at | TIMESTAMP         | Record last update time                     |
 | deleted_at | TIMESTAMP NULL    | Soft delete timestamp                       |
