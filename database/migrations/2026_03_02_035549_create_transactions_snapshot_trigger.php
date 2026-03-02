@@ -29,6 +29,7 @@ return new class extends Migration
                     SET NEW.category_name = cat_name;
                 ELSE
                     SET NEW.category_name = NULL;
+                    SET cat_type = NULL;
                 END IF;
 
                 SELECT name, balance INTO wal_name, wal_balance
@@ -44,6 +45,8 @@ return new class extends Migration
                 END IF;
 
                 SET NEW.wallet_balance_after = wal_balance + NEW.direction_amount;
+
+                UPDATE wallets SET balance = NEW.wallet_balance_after WHERE id = NEW.wallet_id;
             END
         ');
     }
